@@ -5,6 +5,9 @@ import { EventsAppComponent } from './events-app.component'
 import { EventsListComponent } from './events/events-list.component'
 import { EventThumbnailComponent } from './events/event-thumbnail.component'
 import { NavBarComponent } from './nav/navbar.component'
+import { EventService } from './events/shared/event.service'
+import { ToastrService } from './common/toastr.service'
+
 @NgModule({
     imports: [BrowserModule],
     declarations: [
@@ -13,6 +16,9 @@ import { NavBarComponent } from './nav/navbar.component'
         EventThumbnailComponent,
         NavBarComponent
         ],
+    providers: [EventService,
+                ToastrService], //<-- now it's registered as a provider, Ng's injector is aware of this and so
+                               //whenever we request it in another component/service, Ng will know where to get this service
     bootstrap: [EventsAppComponent]
 })
 
