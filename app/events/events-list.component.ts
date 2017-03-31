@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { EventService } from './shared/event.service'
 import { ToastrService } from '../common/toastr.service'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
-    selector: 'events-list',
+    //selector: 'events-list',
     template: `
         <div>
             <h1>Upcoming Ng2 Events</h1>
@@ -21,9 +22,9 @@ import { ToastrService } from '../common/toastr.service'
 
 export class EventsListComponent implements OnInit{
 
-    events:any[]
+    events:any
     //eventService
-    constructor(private eventService: EventService, private toastr: ToastrService){ //<-- this is short hand for the other commented out things
+    constructor(private eventService: EventService, private toastr: ToastrService, private route:ActivatedRoute){ //<-- this is short hand for the other commented out things
                                                      // on the lines right above and below. The service is injected 
                                                      //into our constructor
         //this.eventService = eventService
@@ -36,7 +37,8 @@ export class EventsListComponent implements OnInit{
     }
 
     ngOnInit(){ //<-- this is called when component is being loaded
-        this.events = this.eventService.getEvents()
+        //this.eventService.getEvents().subscribe(events => {this.events = events}) //use subscribe to get data out of an observerable
+        this.events = this.route.snapshot.data['events']
     }
 
     handleThumbnailClick(eventName){

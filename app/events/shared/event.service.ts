@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { Subject } from 'rxjs/RX' //<-- allows us to use observerables which makes our data act like AJAX call
 
 @Injectable() //Adding this injectable decorator is importnat for any service that you're 
               //going to inject into your components or another service.
@@ -10,7 +11,14 @@ export class EventService{
     //constructor(private http:Http){} <-- this eventsService injects the HTTP service and hence the decorator is required
     // but since we never know if a service is going to take a dependency later, it's just best practice to always add it
     getEvents(){
-        return EVENTS
+        let subject = new Subject() //<-- Subject() is a type of observerable
+        setTimeout(()=>{subject.next(EVENTS); subject.complete();}, 100) //subject.next(EVENTS) <-- we're adding data to this observerable stream after 100 ms
+        return subject //subject is an observerable which is like a raise wher ethe data arrives over time
+        //return EVENTS <-- this acts synchronously 
+    }
+
+    getEvent(id:number){
+        return EVENTS.find(event => event.id ===id)
     }
 }
 
