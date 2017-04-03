@@ -20,12 +20,12 @@ import{
 // import { EventDetailsComponent } from './events/event-details/event-details.component'
 // import { EventService } from './events/shared/event.service'
 
-
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/navbar.component'
 import { ToastrService } from './common/toastr.service'
 import { appRoutes } from './routes'
 import { Error404Component } from './errors/404.component'
+import { AuthService } from './user/auth.service'
 
 @NgModule({
     imports: [
@@ -46,6 +46,7 @@ import { Error404Component } from './errors/404.component'
                 ToastrService,
                 EventRouteActivator,
                 EventListResolver,
+                AuthService,
                 { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }
                 ], //<-- now it's registered as a provider, Ng's injector is aware of this and so
                                //whenever we request it in another component/service, Ng will know where to get this service

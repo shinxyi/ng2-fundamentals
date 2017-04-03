@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { EventService } from '../shared/event.service'
 import { ActivatedRoute } from '@angular/router'
-
+import { IEvent } from '../shared/index'
 @Component({
     //we don't need a selector b/c this isn't a child component that will be included inside a 
     //parent component. It will be a page that is directly routed to.
@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router'
 })
 
 export class EventDetailsComponent{
-    event:any
+    event:IEvent
 
     constructor(private eventService:EventService, private route:ActivatedRoute){
 
